@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+    <h2 id="win" style="color: green; display: none;">YOU WIN</h2>
+    <h2 id="lose" style="color: red; display: none;">YOU LOSE :(</h2>
+
+    <script>
+
+        let tries = 0;
+        let score = 0;
+
+        while(tries < 5) {
+            let guess = prompt("Pick a number between 0 and 10");
+            let num = Math.floor(Math.random() * 10);
+
+            if(guess == num) {
+                score = score + 1;
+                alert("Correct! keep going!");
+            } else {
+                alert("You guessed " + guess + " but the number was " + num + ". Try again");
+            }
+
+            tries = tries + 1;
+        }
+
+        
+        alert("Good job, your score is " + score + " out of 5");
+
+        if(score === 5) {
+            document.getElementById("win").style.display = "inline";
+        } else {
+            document.getElementById("lose").style.display = "inline";
+        }
+
+    </script>
+
+</body>
+</html>
