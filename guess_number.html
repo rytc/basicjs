@@ -9,7 +9,7 @@
 <body>
 
     
-    <h2 id="win" style="color: green; display: none;">YOU WIN</h2>
+    <h2 id="win" style="color: green; display: none;">YOU WIN :)</h2>
     <h2 id="lose" style="color: red; display: none;">YOU LOSE :(</h2>
 
     <script>
@@ -18,10 +18,10 @@
         let score = 0;
 
         while(tries < 5) {
-            let guess = prompt("Pick a number between 0 and 10");
-            let num = Math.floor(Math.random() * 10);
+            let guess = prompt("Pick a number between 0 and 10 inclusive");
+            let num = Math.floor(Math.random() * 11);
 
-            if(guess == num) {
+            if(parseInt(guess) === num) {
                 score = score + 1;
                 alert("Correct! keep going!");
             } else {
@@ -34,7 +34,7 @@
         
         alert("Good job, your score is " + score + " out of 5");
 
-        if(score === 5) {
+        if(score > 1) {
             document.getElementById("win").style.display = "inline";
         } else {
             document.getElementById("lose").style.display = "inline";
