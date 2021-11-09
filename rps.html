@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+   <script>
+   
+    let turns = 0;
+    let moves = ['r', 'p', 's'];
+    let wins = 0;
+    let losses = 0;
+    let ties = 0;
+
+    while(turns < 10) {
+        let user_move = prompt("Enter:\n'r' - Rock\n'p' - Paper\n's' - Scissors\n");
+        let ai_move = moves[Math.floor(Math.random() * 3)];
+
+        if(user_move !== "r" && user_move !== "p" && user_move !== "s") {
+            console.log("Invalid move: " + user_move);
+            continue;
+        }
+
+        if(user_move === ai_move) {
+            ties += 1;
+            alert("It was a tie!😬\nTotal wins: " + wins);
+        } else if(user_move === 's' && ai_move === 'p') {
+            wins += 1;
+            alert("AI chose paper, you win!🎉\nTotal wins: " + wins);
+        } else if(user_move === 'p' && ai_move === 'r') {
+            wins += 1;
+            alert("AI chose rock, you win!🎉\nTotal wins: " + wins);
+        } else if(user_move === 'r' && ai_move === 's') {
+            wins += 1;
+            alert("AI chose scissors, you win!🎉\nTotal wins: " + wins);
+        } else {
+            losses += 1;
+            alert("AI chose " + ai_move + ", you lost.😢\nTotal wins: " + wins);
+        }
+
+        turns += 1;
+    }
+
+    alert("Game over!\nWins: " + wins + "\nLosses: " + losses + "\nTies: " + ties);
+
+
+   </script>
+</body>
+</html>
