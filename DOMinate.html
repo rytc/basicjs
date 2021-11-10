@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="text-align: center; width:50%; margin-left:25%;">
+        <button id="increment">Increment</button>
+        <button id="superIncrement">SUPER INCREMENT!!1111</button>
+        <button id="decrement">Decrement</button>
+        <button id="superDecrement">SUPER DECREMENT!1!111!!</button>
+        <button id="negate">Negate</button>
+        <button id="gowild">Go Wild</button>
+        <button id="end" style="background-color: red;">DO NOT PRESS</button>
+        <h1 style="font-size: 24em;" id="num">0</h1>
+    </div>
+
+    <script>
+
+        const rand = (maxValue) => { return Math.floor(Math.random() * maxValue); };
+
+        let value = 0;
+        var label = document.getElementById('num');
+
+        let borderStyles = ['solid', 'dashed', 'dotted', 'double'];
+        let fonts = ['Arial', 'Verdana', 'Helvetica', 'Tahoma', 'Times New Roman', 'Georgia', 'Garamond', 'Courier New'];
+
+        label.textContent = value;
+
+        document.getElementById('increment').addEventListener('click', () => {
+            value += 1;
+            label.textContent = value;
+        });
+        
+        document.getElementById('superIncrement').addEventListener('click', () => {
+            value = value * 2;
+            label.textContent = value;
+        });
+
+
+        document.getElementById('decrement').addEventListener('click', () => {
+            value -= 1;
+            label.textContent = value;
+        });
+
+        document.getElementById('superDecrement').addEventListener('click', () => {
+            value -= Math.floor(value / 2);
+            label.textContent = value;
+        });
+
+        document.getElementById('end').addEventListener('click', () => {
+            document.body.style.display = 'none';
+        });
+
+        document.getElementById('negate').addEventListener('click', () => {
+            value = -value;
+            label.textContent = value;
+        });
+
+        document.getElementById('gowild').addEventListener('click', () => {
+            let r = rand(255);
+            let g = rand(255);
+            let b = rand(255);
+            document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+            r = rand(255);
+            g = rand(255);
+            b = rand(255);
+            label.style.color = `rgb(${r}, ${g}, ${b})`;
+
+            r = rand(255);
+            g = rand(255);
+            b = rand(255);
+            let borderSize = rand(10);
+            let borderStyle = borderStyles[rand(borderStyles.length)];
+            label.style.border = `${borderSize}px ${borderStyle} rgb(${r}, ${g}, ${b})`;
+
+            let fontStyle = fonts[rand(fonts.length)];
+            label.style.fontFamily = fontStyle;
+        });
+
+
+    </script>
+</body>
+</html>
