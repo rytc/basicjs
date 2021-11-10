@@ -26,7 +26,7 @@
 
         if(user_move === ai_move) {
             ties += 1;
-            alert("It was a tie!😬\nTotal wins: " + wins);
+            alert("It was a tie!\nTotal wins: " + wins);
         } else if(user_move === 's' && ai_move === 'p') {
             wins += 1;
             alert("AI chose paper, you win!🎉\nTotal wins: " + wins);
@@ -38,7 +38,7 @@
             alert("AI chose scissors, you win!🎉\nTotal wins: " + wins);
         } else {
             losses += 1;
-            alert("AI chose " + ai_move + ", you lost.😢\nTotal wins: " + wins);
+            alert("AI chose " + ai_move + ", you lost.\nTotal wins: " + wins);
         }
 
         turns += 1;
