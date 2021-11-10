@@ -13,6 +13,7 @@
         <button id="decrement">Decrement</button>
         <button id="superDecrement">SUPER DECREMENT!1!111!!</button>
         <button id="negate">Negate</button>
+        <button id="reset">Reset</button>
         <button id="gowild">Go Wild</button>
         <button id="end" style="background-color: red;">DO NOT PRESS</button>
         <h1 style="font-size: 24em;" id="num">0</h1>
@@ -36,7 +37,7 @@
         });
         
         document.getElementById('superIncrement').addEventListener('click', () => {
-            value = value * 2;
+            value += 10;
             label.textContent = value;
         });
 
@@ -47,7 +48,7 @@
         });
 
         document.getElementById('superDecrement').addEventListener('click', () => {
-            value -= Math.floor(value / 2);
+            value -= 10;
             label.textContent = value;
         });
 
@@ -57,6 +58,11 @@
 
         document.getElementById('negate').addEventListener('click', () => {
             value = -value;
+            label.textContent = value;
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            value = 0;
             label.textContent = value;
         });
 
