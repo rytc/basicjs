@@ -33,6 +33,53 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
+        let tv_show_list = [
+            {
+                title: "Arrested Development",
+                episodes: 84,
+                main_char: "Michael Bluth",
+                director: "Mitchell  Hurwitz"
+            },
+            {
+                title: "Mad Men",
+                episodes: 92,
+                main_char: "Don Draper",
+                director: "Matthew Weiner"
+            },
+            {
+                title: "Breaking Bad",
+                episodes: 62,
+                main_char: "Walter White",
+                director: "Vince Gilligan"
+            },
+            {
+                title: "The Office",
+                episodes: 188,
+                main_char: "Michael Scott",
+                director: "Greg Daniels"
+            },
+            {
+                title: "Archer",
+                episodes: 67,
+                main_char: "Sterling Archer",
+                director: "Adam Reed"
+            },
+        ];
+
+        for(let i = 0; i < tv_show_list.length; i++) {
+            let element = document.createElement('div');
+            let show = tv_show_list[i];
+            element.innerHTML = `
+                <h4>${show.title}</h4>
+                <ul>
+                    <li><span style="font-weight:bold">Episodes:</span> ${show.episodes}</li>
+                    <li><span style="font-weight:bold">Main Character:</span> ${show.main_char}</li>
+                    <li><span style="font-weight:bold">Director:</span> ${show.director}</li>
+                </ul>
+            <hr />`;
+            document.getElementById('movie_list').append(element);
+        }
+
         document.getElementById('add_movie').addEventListener('click', (event) => {
             event.preventDefault();
 
@@ -44,7 +91,6 @@
                     <li><span style="font-weight:bold">Main Character:</span> ${document.getElementById('main_character').value}</li>
                     <li><span style="font-weight:bold">Director:</span> ${document.getElementById('director').value}</li>
                 </ul>
-            
             <hr />`;
             document.getElementById('movie_list').append(element);
 
