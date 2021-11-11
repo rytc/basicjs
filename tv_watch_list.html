@@ -16,7 +16,7 @@
             <div class="col-md-6">
                 <form>
                     <label for="tv_title">TV Show Title</label>
-                    <input type="text" id="movie_title"><br />
+                    <input type="text" id="tv_title"><br />
                     <label for="episode_count">Episodes</label>
                     <input type="text" id="episode_count"><br/>
                     <label for="main_character">Main Character</label>
@@ -38,7 +38,7 @@
 
             let element = document.createElement('div');
             element.innerHTML = `
-                <h4>${document.getElementById('movie_title').value}</h4>
+                <h4>${document.getElementById('tv_title').value}</h4>
                 <ul>
                     <li><span style="font-weight:bold">Episodes:</span> ${document.getElementById('episode_count').value}</li>
                     <li><span style="font-weight:bold">Main Character:</span> ${document.getElementById('main_character').value}</li>
@@ -47,6 +47,11 @@
             
             <hr />`;
             document.getElementById('movie_list').append(element);
+
+            document.getElementById('tv_title').value = '';
+            document.getElementById('episode_count').value = '';
+            document.getElementById('main_character').value = '';
+            document.getElementById('director').value = '';
         });
     </script>
 </body>
