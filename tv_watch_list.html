@@ -76,6 +76,7 @@
                     <li><span style="font-weight:bold">Main Character:</span> ${show.main_char}</li>
                     <li><span style="font-weight:bold">Director:</span> ${show.director}</li>
                 </ul>
+                <button class="btn btn-danger delete">Delete</button>
             <hr />`;
             document.getElementById('movie_list').append(element);
         }
@@ -91,6 +92,7 @@
                     <li><span style="font-weight:bold">Main Character:</span> ${document.getElementById('main_character').value}</li>
                     <li><span style="font-weight:bold">Director:</span> ${document.getElementById('director').value}</li>
                 </ul>
+                <button class="btn btn-danger delete">Delete</button>
             <hr />`;
             document.getElementById('movie_list').append(element);
 
@@ -98,6 +100,12 @@
             document.getElementById('episode_count').value = '';
             document.getElementById('main_character').value = '';
             document.getElementById('director').value = '';
+        });
+
+        document.addEventListener('click', (event) => {
+            if(event.target.className.split(' ').includes('delete')) {
+                event.target.parentNode.remove();
+            }
         });
     </script>
 </body>
