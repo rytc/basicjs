@@ -13,7 +13,7 @@
     <br />
     <main class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" style="text-align: center;">
                 <form>
                     <label for="todo">Todo</label>
                     <input type="text" id="todo"> 
@@ -23,6 +23,7 @@
             <div class="col-md-8" style="border-left: 1px solid grey;">
                 <ul class="list-group" id="todo_list">
                 </ul>
+                <button class="btn btn-secondary" id="clear_list">Clear List</button>
             </div>
         </div>
     </main>
@@ -36,12 +37,17 @@
             let element = document.createElement('li');
             element.classList = "list-group-item"
             element.innerHTML = `
-            <input class="form-check-input me-1 done" type="checkbox" value="not_done" aria-label="...">
-            ${document.getElementById('todo').value}<br />
-            <button class="delete btn btn-danger" style="float:right;">🗑</button>`;
+                    <input class="form-check-input me-1 done" type="checkbox" value="not_done" aria-label="...">
+                    ${document.getElementById('todo').value}<br />
+                    <button class="delete btn btn-danger" style="float:right;">🗑</button>`;
+
             document.getElementById('todo_list').append(element);
 
             document.getElementById('todo').value = '';
+        });
+
+        document.getElementById("clear_list").addEventListener('click', (event) => {
+            let list = document.getElementById('todo_list').innerHTML = '';
         });
 
         document.addEventListener('click', (event) => {
@@ -52,7 +58,7 @@
                     event.target.parentNode.style.backgroundColor = "#198754";
                     event.target.parentNode.style.color = "#FFF";
                     event.target.value = "done";
-                } else if(event.target.value == "done") {
+                } else if(event.target.value === "done") {
                     event.target.parentNode.style.backgroundColor = "#FFF";
                     event.target.parentNode.style.color = "#000";
                     event.target.value = "not_done";
