@@ -28,10 +28,17 @@
 
         $("#add_movie").click(() => {
             event.preventDefault();
-            const entry = `
+            const entry = $(`
                 <li class="list-group-item">
-                    <h3>${$("#movie_name").val()}</h3></li>
-                `;
+                    <h3>${$("#movie_name").val()}</h3>
+                    </li>
+                `);
+            const deleteBtn = $(`<button class="btn btn-danger">Delete</button>`);
+            deleteBtn.click(() => {
+                event.target.parentNode.remove();
+            });
+            entry.append(deleteBtn);
+
             $("#movie_list").append(entry);
         });
 
