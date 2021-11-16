@@ -22,7 +22,7 @@
 
     <!-- Jumbotron with Title -->
     <div class="jumbotron">
-      <h1 class="text-center">
+      <h1 class="text-center title">
         <strong>Captain Planet</strong>
       </h1>
       <hr>
@@ -49,6 +49,8 @@
                 Flip</button>
               <button class="btn btn-danger btn-lg unflip-button">
                 <span class="fa fa-minus"></span> Unflip</button>
+              <button class="btn btn-primary btn-lg transform-button">
+                TRANSFORM</button>
 
             </div>
           </div>
@@ -167,6 +169,11 @@
             $(this).css({ transform: 'scaleX(' + now + ')' });
           }
         })
+      });
+
+      $(".transform-button").click(() => {
+        captainPlanet.attr('src', "https://upload.wikimedia.org/wikipedia/en/3/35/Supermanflying.png");
+        $(".title").html("<strong>Superman</strong>");
       });
 
       // Size Buttons
