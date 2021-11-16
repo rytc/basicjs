@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Clicker</title>
+</head>
+<body>
+    
+    <div style="text-align: center">
+        <button id="increment">Increment</button>
+        <button id="decrement">Decrement</button>
+        <button id="reset">Reset</button>
+        <h1 id="counter">0</h1>
+    </div>
+
+    <script   src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+    <script>
+        let counter = 0;
+        $("#increment").click(() => {
+            counter++;
+            $("#counter").text(counter);
+        });
+        $("#decrement").click(() => {
+            counter--;
+            $("#counter").text(counter);
+        });
+        $("#reset").click(() => {
+            counter = 0;
+            $("#counter").text(counter);
+        });
+
+    </script>
+
+</body>
+</html>
