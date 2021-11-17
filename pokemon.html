@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
+        <form>
+            <input type="text" id="pokemon_name">
+            <button id="search">Search</button>
+        </form>
         <table style="border: 0; text-align: top;">
             <tr>
                 <td id="img"></td>
@@ -18,39 +22,49 @@
         </table>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        axios.get("https://pokeapi.co/api/v2/pokemon/squirtle")
-        .then(res => {
-            let pokemon = res.data;
-            document.getElementById("img").innerHTML = `<img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">`;
-            document.getElementById("data").innerHTML = `
-                <h4>${pokemon.name}</h4>
-                <ul>
-                    <li>HP: ${pokemon.stats[0].base_stat}</li>
-                    <li>Base exp: ${pokemon.base_experience}</li>
-                    <li>Height: ${pokemon.height}</li>
-                    <li>Weight: ${pokemon.weight}</li>
-                </ul>
-            `;
 
-            let movesList = "<h4>Moves:</h4><ol>"
-            for(let i = 0; i < pokemon.moves.length; i++) {
-                let move = pokemon.moves[i];
-                movesList += `<li>${move.move.name}</li>`;
-            }
-            movesList += "</ol";
+        const get_pkmn = (name) => {
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+            .then(res => {
+                let pokemon = res.data;
+                document.getElementById("img").innerHTML = `<img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">`;
+                document.getElementById("data").innerHTML = `
+                    <h4>${pokemon.name}</h4>
+                    <ul>
+                        <li>HP: ${pokemon.stats[0].base_stat}</li>
+                        <li>Base exp: ${pokemon.base_experience}</li>
+                        <li>Height: ${pokemon.height}</li>
+                        <li>Weight: ${pokemon.weight}</li>
+                    </ul>
+                `;
 
-            document.getElementById("moves").innerHTML = movesList;
+                let movesList = "<h4>Moves:</h4><ol>"
+                for(let i = 0; i < pokemon.moves.length; i++) {
+                    let move = pokemon.moves[i];
+                    movesList += `<li>${move.move.name}</li>`;
+                }
+                movesList += "</ol";
 
-            let typesList = "<h4>Types:</h4><ul>";
-            for(let i = 0; i < pokemon.types.length; i++) {
-                let type = pokemon.types[i];
-                typesList += `<li>${type.type.name}</li>`;
-            }
-            typesList += "</ul>"
-            document.getElementById("types").innerHTML = typesList;
-        }).catch((err) => {
-            alert("API error " + err)
-        })
+                document.getElementById("moves").innerHTML = movesList;
+
+                let typesList = "<h4>Types:</h4><ul>";
+                for(let i = 0; i < pokemon.types.length; i++) {
+                    let type = pokemon.types[i];
+                    typesList += `<li>${type.type.name}</li>`;
+                }
+                typesList += "</ul>"
+                document.getElementById("types").innerHTML = typesList;
+            }).catch((err) => {
+                alert("API error " + err)
+            })
+        }
+        document.getElementById("search").addEventListener("click", (event) => {
+            event.preventDefault();
+            let name = document.getElementById("pokemon_name").value;
+            get_pkmn(name);
+
+        });
+        
     </script>
 
 </body>
