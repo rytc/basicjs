@@ -29,6 +29,12 @@
             axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
             .then(res => {
                 let pokemon = res.data;
+
+                if(!pokemon.name) {
+                    alert("Pokemon not found");
+                    return;
+                }
+
                 document.getElementById("img").innerHTML = `<img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">`;
                 document.getElementById("data").innerHTML = `
                     <h4>${pokemon.name}</h4>
@@ -57,7 +63,7 @@
                 typesList += "</ul>"
                 document.getElementById("types").innerHTML = typesList;
             }).catch((err) => {
-                alert("API error " + err)
+                alert("Pokemon not found (" + err + ")")
             })
         }
         document.getElementById("search").addEventListener("click", (event) => {
