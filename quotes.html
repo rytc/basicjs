@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qutoes app</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="content m-4">
+        <div class="row p-4" style="border-bottom: 2px solid black">
+            <div class="col-1" style="border-right: 1px solid gray"> 
+              <button type="button"  class="btn btn-primary" id="get_quote">Get Quote</button>
+            </div>
+            <div class="col-6" id="new_quote">
+                <figure>
+                    <blockquote class="blockquote">
+                        <p id="new_quote_text"></p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer" id="new_quote_author">
+                    </figcaption>
+                </figure>
+                <button class="btn btn-secondary" id="save_quote" style="display:none">Save Quote</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 m-4">
+                <h3>Saved quotes</h3>
+                <ul id="saved_quote_list" class="list-group"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let currentQuote = {
+            text: "",
+            author: ""
+        }; 
+
+        const onDeleteQuote = (event) => {
+            //alert(event.target.parentNode.dataset.index);
+            let savedQuotes = JSON.parse(localStorage.quotes);
+            savedQuotes.splice(event.target.parentNode.dataset.index, 1);
+            localStorage.quotes = JSON.stringify(savedQuotes);
+            event.target.parentNode.remove();
+        }
+
+        const displaySavedQuotes = () => {
+            if(localStorage.quotes) {
+                let savedQuotes = JSON.parse(localStorage.quotes);
+                for(let i = 0; i < savedQuotes.length; i++) {
+                    let quoteElem = document.createElement("li");
+                    let quote = savedQuotes[i];
+                    quoteElem.style = "list-group-item";
+                    quoteElem.innerHTML = `
+                        <figure>
+                            <blockquote class="blockquote">
+                                <p id="new_quote_text">${quote.text}</p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer" id="new_quote_author">
+                                ${quote.author}
+                            </figcaption>
+                        </figure>
+
+                    `;
+                    quoteElem.dataset.index = i;
+                    let deleteBtn = document.createElement("button");
+                    deleteBtn.className = "btn btn-danger";
+                    deleteBtn.innerText = "Delete";
+                    deleteBtn.addEventListener("click", onDeleteQuote);
+                    quoteElem.append(deleteBtn);
+
+                    let hr = document.createElement("hr");
+                    quoteElem.append(hr);
+
+                    document.getElementById("saved_quote_list").append(quoteElem);
+                }
+            }
+        }
+
+        displaySavedQuotes();
+
+        document.getElementById("get_quote").addEventListener("click", () => {
+            axios.get("https://goquotes-api.herokuapp.com/api/v1/random?count=1")
+            .then(res => { 
+                console.log(res);
+                let quote = res.data.quotes[0];
+                document.getElementById("new_quote_text").innerHTML = quote.text;
+                document.getElementById("new_quote_author").innerHTML = quote.author;
+                document.getElementById("save_quote").style.display = "";
+                currentQuote.text = quote.text;
+                currentQuote.author = quote.author;
+
+            });
+        });
+
+        document.getElementById("save_quote").addEventListener("click", () => {
+            if(!localStorage.quotes) {
+                localStorage.quotes = "[]";
+            }
+
+            let savedQuotes = JSON.parse(localStorage.quotes);
+            savedQuotes.push(currentQuote);
+            localStorage.quotes = JSON.stringify(savedQuotes);
+            document.getElementById("save_quote").style.display = "none";
+            document.getElementById("saved_quote_list").innerHTML = "";
+            displaySavedQuotes();
+
+        });
+
+    </script>
+
+</body>
+</html>
