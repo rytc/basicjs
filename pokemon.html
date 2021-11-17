@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pokedex</title>
 </head>
 <body>
         <form>
+            <label for="pokemon_name">Pokemon: </label>
             <input type="text" id="pokemon_name">
             <button id="search">Search</button>
         </form>
@@ -24,6 +25,7 @@
     <script>
 
         const get_pkmn = (name) => {
+            name = name.toLowerCase();
             axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
             .then(res => {
                 let pokemon = res.data;
