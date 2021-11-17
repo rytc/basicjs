@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <table style="border: 0; text-align: top;">
+            <tr>
+                <td id="img"></td>
+                <td id="data"></td>
+            </tr>
+            <tr>
+                <td id="moves"></td>
+                <td id="types" style="vertical-align: top;"></td>
+        </table>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios.get("https://pokeapi.co/api/v2/pokemon/squirtle")
+        .then(res => {
+            let pokemon = res.data;
+            document.getElementById("img").innerHTML = `<img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">`;
+            document.getElementById("data").innerHTML = `
+                <h4>${pokemon.name}</h4>
+                <ul>
+                    <li>HP: ${pokemon.stats[0].base_stat}</li>
+                    <li>Base exp: ${pokemon.base_experience}</li>
+                    <li>Height: ${pokemon.height}</li>
+                    <li>Weight: ${pokemon.weight}</li>
+                </ul>
+            `;
+
+            let movesList = "<h4>Moves:</h4><ol>"
+            for(let i = 0; i < pokemon.moves.length; i++) {
+                let move = pokemon.moves[i];
+                movesList += `<li>${move.move.name}</li>`;
+            }
+            movesList += "</ol";
+
+            document.getElementById("moves").innerHTML = movesList;
+
+            let typesList = "<h4>Types:</h4><ul>";
+            for(let i = 0; i < pokemon.types.length; i++) {
+                let type = pokemon.types[i];
+                typesList += `<li>${type.type.name}</li>`;
+            }
+            typesList += "</ul>"
+            document.getElementById("types").innerHTML = typesList;
+        }).catch((err) => {
+            alert("API error " + err)
+        })
+    </script>
+
+</body>
+</html>
